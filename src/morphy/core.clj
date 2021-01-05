@@ -40,7 +40,11 @@
       (update-templatable page-data/populate)))
 
 (defn build-site [{:keys [input-dir] :as context}]
-  (-> context (merge (build-pages input-dir)) site-model/build templates/render))
+  (-> context
+      (merge (build-pages input-dir))
+      site-model/build
+      tags/generate-index-pages
+      templates/render))
 
 (defn generate-site [context]
   (-> context build-site write-files))
