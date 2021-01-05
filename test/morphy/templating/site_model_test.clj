@@ -45,3 +45,21 @@ group B three
 -----
 "
              (u/get-content site ""))))))
+
+(deftest tags
+  (let [site (u/get-site "templates/tags/basic")]
+    (testing "it groups posts by tag"
+      (is (= "one - 2
+-----
+In one only
+In one and two
+
+-----
+two - 2
+-----
+In two only
+In one and two
+
+-----
+"
+             (u/get-content site ""))))))
